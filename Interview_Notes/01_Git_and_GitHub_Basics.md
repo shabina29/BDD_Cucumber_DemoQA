@@ -1,4 +1,4 @@
-📝 Folder: Interview_Notes
+**📝 Folder: Interview_Notes**
 File Name: 07_GitHub_Deployment_Steps.txt
 
 Content:
