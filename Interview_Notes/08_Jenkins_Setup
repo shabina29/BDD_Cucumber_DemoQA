@@ -1,0 +1,81 @@
+Chalo 15 minutes mein isse setup karte hain.
+
+Step 1: Jenkins Dashboard par Job Create Karna
+Abhi aapke Jenkins screenshot mein sirf SeleniumDemo_CI dikh raha hai. Humein naya Pipeline Job banana hoga.
+
+New Item par click karein.
+
+Name rakhein: DemoQA_Automation_Pipeline.
+
+Pipeline option select karein aur OK dabayein.
+
+Step 2: Pipeline Configuration (Connecting GitHub)
+Job ke andar niche scroll karein aur Pipeline section mein jayein:
+
+Definition: Select karein "Pipeline script from SCM".
+
+SCM: Select karein "Git".
+
+Repository URL: Apna GitHub link dalein (https://github.com/shabina29/BDD_Cucumber_DemoQA.git).
+
+Branch Specifier: Check karein ki aapka code main branch par hai ya master. (Aapke screenshot mein main dikh raha hai).
+
+Script Path: Isse Jenkinsfile hi rehne dein.
+
+Save kar dein.
+
+Step 3: Night Regression Setup (The "H 0 * * *" Magic)
+Ab interview perspective se Night Regression set up karte hain.
+
+Isi Job mein "Configure" par click karein.
+
+Build Triggers section mein jayein.
+
+"Build periodically" checkmark karein.
+
+Schedule box mein likhein: H 0 * * *
+
+Iska matlab: Daily raat ko 12 baje ye test apne aap chalega.
+
+Save karein.
+
+Step 4: Email Notification Setup (Interview Strategy)
+Interviewer poochega: "Jenkins ne mail kaise bheja?" Aapko batana hoga ki humne Manage Jenkins mein SMTP set kiya tha.
+
+Manage Jenkins > System (ya Configure System) mein niche scroll karein.
+
+E-mail Notification section mein:
+
+SMTP server: smtp.gmail.com
+
+Advanced: Check "Use SMTP Authentication".
+
+User Name: Aapka email.
+
+Password: Gmail ka "App Password" (Normal password nahi chalega).
+
+SMTP Port: 465
+
+Test configuration karke check karein ki mail aa raha hai ya nahi.
+
+📝 Study Material (Hinglish/English Note)
+File Name: 27_SDET_Jenkins_Setup.txt
+
+Kid-Friendly (Hinglish): Jenkins ko "Smart Manager" banane ke liye humne 2 cheezein ki. Pehle ek Alarm (Cron) lagaya jo raat ko 12 baje regression chalayega. Phir use ek Postman (SMTP) diya taaki result aate hi wo team ko "Chittiyan" (Emails) bhej sake.
+
+Professional SDET Interview Note:
+
+Q: How do you trigger Nightly Regression in Jenkins?
+
+A: I use the 'Build periodically' trigger with a cron expression like H 0 * * *. This ensures the full regression suite runs when the server load is low.
+
+Q: How did you configure Email alerts?
+
+A: I configured the Global SMTP settings in Jenkins using a dedicated service account. In the Jenkinsfile, I used the mail step in the post block to send dynamic alerts based on success or failure status.
+
+🚀 Next Move: Check "Build Now"
+Ab aapne job create kar li hai, toh Jenkins dashboard par jaakar "Build Now" dabayein.
+
+Check karein ki Stage View mein "Checkout", "Build", aur "Test" green ho rahe hain ya nahi.
+
+Check karein ki Console Output mein "SUCCESS" dikh raha hai.
