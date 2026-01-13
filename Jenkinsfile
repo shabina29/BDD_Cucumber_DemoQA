@@ -19,7 +19,6 @@ pipeline {
 
     tools {
         maven 'Maven_3'
-        // jdk 'JDK_17'  // Uncomment ONLY if configured in Jenkins
     }
 
     stages {
@@ -31,13 +30,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                bat 'mvn clean compile'
             }
         }
 
         stage('Test Execution') {
             steps {
-                sh "mvn test -Dbrowser=${params.BROWSER} -Dheadless=${params.HEADLESS} -Denv=${params.ENV}"
+                bat "mvn test -Dbrowser=%BROWSER% -Dheadless=%HEADLESS% -Denv=%ENV%"
             }
         }
     }
@@ -45,7 +44,7 @@ pipeline {
     post {
         always {
             script {
-                junit 'target/surefire-reports/*.xml'
+                junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
 
                 publishHTML(target: [
                     allowMissing: true,
@@ -59,20 +58,5 @@ pipeline {
 
             cleanWs()
         }
-
-        // Enable email ONLY after SMTP setup
-        /*
-        success {
-            mail to: 'sshahinece@gmail.com',
-                 subject: "SUCCESS: Build #${env.BUILD_NUMBER}",
-                 body: "Build passed: ${env.BUILD_URL}"
-        }
-
-        failure {
-            mail to: 'sshahinece@gmail.com',
-                 subject: "FAILURE: Build #${env.BUILD_NUMBER}",
-                 body: "Build failed: ${env.BUILD_URL}"
-        }
-        */
     }
 }
