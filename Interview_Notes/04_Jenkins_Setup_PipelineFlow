@@ -1,0 +1,60 @@
+📝 Kid-Friendly Note (Hinglish Style)
+Topic: Jenkins Pipeline (The Smart Train Track)
+
+Socho tumhare paas ek Magic Train (Code) hai. Is train ko station (GitHub) se nikal kar final destination (Report) tak pahunchna hai.
+
+Setup (The Track): Pehle humne train ki patriyan (Jenkins Pipeline) bichayi. Isme humne Jenkins ko bataya ki train kahan rukegi.
+
+Parameters (The Choice): Yeh train ki 'Ticket Machine' hai. Yahan tum select karte ho ki train "Chrome City" jayegi ya "Firefox City", aur wo "Invisible (Headless)" hogi ya nahi.
+
+Stages (The Stations):
+
+Checkout: GitHub station se train mein saara samaan (Code) load hota hai.
+
+Build: Engine check hota hai ki sab sahi hai ya nahi (Maven compile).
+
+Test: Train chal padti hai aur raste mein saare obstacles (Tests) ko check karti hai.
+
+Important Kyun Hai?: Kyunki tumhe har baar train khud nahi chalani padti. Jaise hi tum naya samaan (Code) GitHub par daalte ho, train apne aap chal padti hai.
+
+📝 SDET Interview Notes (English)
+File Name: 21_Jenkins_Pipeline_Comprehensive.txt
+
+1. Framework Setup Flow
+Infrastructure: Jenkins is installed and integrated with the GitHub repository via Webhooks.
+
+Configuration: A Jenkinsfile is placed at the project root to define the "Pipeline as Code."
+
+Trigger: The pipeline is set to githubPush(), ensuring continuous integration.
+
+2. Code Explanation (Stages)
+Parameters: Uses choice and booleanParam to allow runtime configuration of Browser and Headless mode.
+
+Checkout: Pulls the latest source code from the main branch.
+
+Build: Executes mvn clean compile to ensure no stale classes exist.
+
+Execution: Runs mvn test while passing Jenkins parameters as Maven System Properties (-D flag).
+
+Post-Actions: Uses publishHTML for Extent Reports and mail for instant status alerts.
+
+3. Why is it Important?
+Efficiency: Automates the build and test cycle, saving manual effort.
+
+Fast Feedback: Detects "broken code" immediately after a push.
+
+Consistency: Ensures tests run in a clean, controlled environment every time.
+
+❓ Follow-up Interview Q&A
+Q1: What is the difference between a Scripted and a Declarative Pipeline? Ans: I use Declarative Pipeline (starts with pipeline { ... }). It is more modern, has a simpler syntax, and is easier to maintain compared to Scripted pipelines which use Groovy script directly.
+
+Q2: How do your Selenium tests find the browser name passed from Jenkins? Ans: In the Jenkinsfile, I pass it via Maven: mvn test -Dbrowser=${params.BROWSER}. In my Java BaseClass, I use System.getProperty("browser") to capture this value and initialize the driver accordingly.
+
+Q3: What happens if a test fails in the 'Test' stage? Ans: The stage will be marked as "Failed" in Jenkins. However, because I use the post { always { ... } } block, the Extent Report will still be generated and published, allowing me to investigate the failure.
+
+🚀 Final Step (Data Preservation)
+Terminal: git pull origin main --rebase (Error hatane ke liye).
+
+Save: 21_Jenkins_Pipeline_Comprehensive.txt file banakar upar wala English material save karein.
+
+Push: git push origin main.
